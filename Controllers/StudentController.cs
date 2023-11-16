@@ -109,6 +109,7 @@ public class StudentController : ControllerBase
     public IEnumerable<MarkDto> GetMarks(Guid id, SchoolContext ctx)
     {
         return ctx.Marks
+            .Include(m => m.Student)
             .Where(m => m.StudentId == id)
             .Select(m => m.AsDto());
     }
