@@ -1,9 +1,9 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace schoolgrade.Models;
 
-public record Grade {
+public record Grade
+{
     [Key]
     public Guid Id { get; init; }
 
@@ -17,10 +17,13 @@ public record Grade {
 
     public string? Description { get; init; }
 
+    public IList<Student> Students { get; } = new List<Student>();
+
     public DateTimeOffset CreatedDate { get; init; }
 }
 
-public record GradeDto {
+public record GradeDto
+{
     public Guid Id { get; init; }
     public string? Name { get; init; }
     public string? Section { get; init; }
@@ -28,7 +31,8 @@ public record GradeDto {
     public DateTimeOffset CreatedDate { get; init; }
 }
 
-public record CreateGradeDto {
+public record CreateGradeDto
+{
     [Required]
     [MaxLength(10)]
     public string? Name { get; init; }
@@ -40,7 +44,8 @@ public record CreateGradeDto {
     public string? Description { get; init; }
 }
 
-public record UpdateGradeDto {
+public record UpdateGradeDto
+{
     [Required]
     [MaxLength(10)]
     public string? Name { get; init; }
@@ -52,13 +57,17 @@ public record UpdateGradeDto {
     public string? Description { get; init; }
 }
 
-public record DeleteGradeDto {
+public record DeleteGradeDto
+{
     public Guid Id { get; init; }
 }
 
-public static class GradeExtensions {
-    public static GradeDto AsDto(this Grade grade) {
-        return new GradeDto {
+public static class GradeExtensions
+{
+    public static GradeDto AsDto(this Grade grade)
+    {
+        return new GradeDto
+        {
             Id = grade.Id,
             Name = grade.Name,
             Section = grade.Section,

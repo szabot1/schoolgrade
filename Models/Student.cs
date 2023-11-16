@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace schoolgrade.Models;
@@ -24,6 +23,8 @@ public record Student
     public string? Email { get; init; }
 
     public string? Description { get; init; }
+
+    public IList<Mark> Marks { get; } = new List<Mark>();
 
     public DateTimeOffset CreatedDate { get; init; }
 }

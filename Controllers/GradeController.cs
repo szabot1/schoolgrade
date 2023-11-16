@@ -7,7 +7,7 @@ namespace schoolgrade.Controllers;
 
 [ApiController]
 [Route("api/grades")]
-public class GradetController : ControllerBase
+public class GradeController : ControllerBase
 {
     [HttpGet]
     public IEnumerable<GradeDto> GetAll(SchoolContext ctx)
@@ -74,7 +74,6 @@ public class GradetController : ControllerBase
             return NotFound();
         }
 
-        ctx.Students.RemoveRange(ctx.Students.Where(s => s.GradeId == id));
         ctx.Grades.Remove(grade);
         ctx.SaveChanges();
 

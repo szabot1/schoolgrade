@@ -104,4 +104,12 @@ public class StudentController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpGet("{id}/marks")]
+    public IEnumerable<MarkDto> GetMarks(Guid id, SchoolContext ctx)
+    {
+        return ctx.Marks
+            .Where(m => m.StudentId == id)
+            .Select(m => m.AsDto());
+    }
 }
