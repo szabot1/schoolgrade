@@ -88,4 +88,26 @@ public class GradeController : ControllerBase
             .Where(s => s.GradeId == id)
             .Select(s => s.AsDto());
     }
+
+    [HttpGet("{id}/students/names")]
+    public ActionResult GetStudentNames(Guid id, SchoolContext ctx)
+    {
+        var grade = ctx.Grades
+            .Include(g => g.Students)
+            .Where(g => g.Id == id)
+            .Select(g => new
+            {
+                GradeName = g.Name,
+                GradeSection = g.Section,
+                StudentNames = g.Students.Select(s => s.Name)
+            })
+            .FirstOrDefault();
+
+        if (grade is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(grade);
+    }
 }
